@@ -25,3 +25,15 @@ Instructions have only 1 argument, which is why they can be written in a string.
 - 0x07 -> dec    : Decrement ACC
 - 0x08 -> res    : Reset ACC
 ```
+
+## Examples
+
+```
+res
+inp asc st
+inc asc ld asc 
+```
+```
+res
+inc out inc out dec out
+```
