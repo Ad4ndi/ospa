@@ -6,7 +6,7 @@ let program = ref []
 
 let hex_to_int hex =
   try int_of_string hex with
-  | _ -> failwith (" ! NO > " ^ hex)
+  | _ -> failwith ("NO > " ^ hex)
 
 let parse_command cmd =
   match String.lowercase_ascii cmd with
@@ -19,7 +19,7 @@ let parse_command cmd =
   | "inc" -> 0x06
   | "dec" -> 0x07
   | "res" -> 0x08
-  | _ -> failwith (" ! NO > " ^ cmd)
+  | _ -> failwith ("NO > " ^ cmd)
 
 let load_program input =
   let lines = String.split_on_char '\n' input in
@@ -35,7 +35,7 @@ let load_program input =
 
 let push value = memory := value :: !memory
 let pop () = match !memory with
-  | [] -> failwith " ! NO > Stack underflow"
+  | [] -> failwith "NO > Stack underflow"
   | v :: rest -> memory := rest; v
 
 let execute () =
@@ -54,8 +54,8 @@ let execute () =
       | 0x05 -> push !acc; exec_loop ()
       | 0x06 -> acc := !acc + 1; exec_loop ()
       | 0x07 -> acc := !acc - 1; exec_loop ()
-      | 0x0A -> acc := 0; exec_loop ()
-      | _ -> printf " ! NO > %d\n" op; exec_loop ()
+      | 0x08 -> acc := 0; exec_loop ()
+      | _ -> failwith ("NO > " ^ string_of_int op)
     else ()
   in
   exec_loop ()
